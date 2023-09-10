@@ -16,7 +16,7 @@ import Appointment from "components/Appointment";
 export default function Application(props) {
   const {
     state,
-    setDay,
+   
     bookInterview,
     cancelInterview
   } = useApplicationData();
@@ -63,3 +63,6 @@ export default function Application(props) {
     </main>
   );
 }
+
+
+ // setDay,
