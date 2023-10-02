@@ -3,9 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:10.16
-
     working_directory: ~/client
-
     steps:
       - checkout
       - restore_cache:
@@ -20,20 +18,19 @@ jobs:
       - run: npm test
 
   deploy:
-  machine:
-    enabled: true
+    machine:
+      enabled: true
+    working_directory: ~/client
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "f8:8b:bb:1e:0d:88:dd:94:06:fd:f5:d1:6f:be:63:9d"
+      - checkout
+      - run:
+          name: Push Master to Production
+          command: |
+            git push https://github.com/Hamanpreet/scheduler.git master:production
 
-  working_directory: ~/client
-
-  steps:
-    - add_ssh_keys:
-        fingerprints:
-          - "f8:8b:bb:1e:0d:88:dd:94:06:fd:f5:d1:6f:be:63:9d"
-    - checkout
-    - run:
-        name: Push Master to Production
-        command: |
-          git push https://github.com/Hamanpreet/scheduler.git master:production
 workflows:
   version: 2
   test_and_deploy:
@@ -48,3 +45,4 @@ workflows:
               ignore: production
           requires:
             - build
+
