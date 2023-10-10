@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Push Master to Production
           command: |
-            git push https://github.com/Hamanpreet/scheduler.git master:production
+            git push https://github.com/Hamanpreet/scheduler.git main:production
 
 workflows:
   version: 2
